@@ -10,15 +10,22 @@ class TaskList:
         self.tasks = cursor.fetchall()
 
     def add_task(self, description):
+        # Instantiate the task class
         task = Task(description)
+
         cursor.execute(
             "INSERT INTO tasks (description, done) VALUES (?, ?)",
+            # If the tasks was complete, the value is 1, else is 0
             (task.description, 1 if task.completed else 0)
         )
+
+        # Save changes
         conn.commit()
     
     def show_tasks(self):
+        # Get all tasks from DB
         self.get_tasks()
+        
         for index, task in enumerate(self.tasks, start=1):
             print(f"{index}. {task[1]} - {'Completed' if task[2] else 'Pending'}")
     

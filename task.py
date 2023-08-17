@@ -6,6 +6,7 @@ class Task:
     def mark_completed(self):
         self.completed = True
     
+    # Used to display the task
     def __str__(self):
         status = "Completed" if self.completed else "Pending"
         return f"{self.description} - {status}"
